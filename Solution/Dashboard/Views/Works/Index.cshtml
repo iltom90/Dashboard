@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Menu.cshtml";
+}
+
+@section js {
+    @using System.Web.Optimization
+
+    <script type="text/javascript">
+        // global variables
+        var global_pathGetData = "@Url.Action("GetData", "Works")";
+    </script>
+
+    @Scripts.Render("~/JS/Backgrid"
+                , "~/JS/Bootstrap/Bootbox"
+                , "~/JS/Works/Index")
+}
+
+@section css {
+    @Styles.Render("~/CSS/Backgrid")
+}
+
+<input type="hidden" id="hidChkSel" value="" />
+<div style="width: 100%; text-align: center; vertical-align: middle;">
+    <div class="page-header">
+        <h1 id="hTitolo">Works</h1>
+    </div>
+    <div class="panel panel-default" style="width: 90%; margin: auto;">
+        <div class="panel-heading" style="background-color: #FFFFFF!important;">
+            <table style="width: 100%; margin: auto;">
+                <tr>
+                    <td colspan="2"><legend class="legendFilter">Filter</legend></td>
+                </tr>
+                <tr>
+                    <td style="width: 20%; padding-left: 5px;">
+                        <fieldset class="fieldsetFilter">                            
+                            <input id="txtFilterSubject" type="text" placeholder="Subject" autofocus class="form-control" />
+                        </fieldset>
+                    </td>
+                    <td style="width: 20%; padding-left: 5px;">
+                        <fieldset class="fieldsetFilter">
+                            <input id="txtFilterUserID" type="text" placeholder="User ID" autofocus class="form-control" />
+                        </fieldset>
+                    </td>                      
+                </tr>
+            </table>
+
+            <div id="filterDiv" style="display: none;"></div>
+        </div>
+        <div id="grid" class="panel-body">
+        </div>
+        <div id="divMsgErrore" class="alert alert-danger" role="alert" @if (String.IsNullOrEmpty(@ViewBag.MsgErrore)) { <text> style="display:none;" </text>         }>@ViewBag.MsgErrore</div>
+    </div>
+</div>

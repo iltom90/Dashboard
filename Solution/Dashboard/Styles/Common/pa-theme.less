@@ -1,0 +1,47 @@
+﻿/* Set di Colori */
+@colore_Azzurro: #428bca;
+@colore_GialloChiaroTrasp: rgba(255, 237, 138, 0.49);
+
+/* Generici su tutti glie elementi delle pagine */
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+.grid_pulsanti {
+    text-align: center !important;
+}
+
+.riga_nonletto {
+    background-color: @colore_GialloChiaroTrasp;
+    font-weight: bold;
+}
+
+.dettaglio_titolo {
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+.dettaglio_valore {
+    text-align: left;
+    vertical-align: top;
+}
+
+.campo_obbligatorio {
+    font-weight: bold;
+    color: @colore_Azzurro;
+}
+
+.campo_obbligatorio_nonunico {
+    font-weight: normal;
+    color: @colore_Azzurro;
+}
+
+.grid_cella_tagsinput {
+    span.label {
+        margin-right: 5px;
+        font-size: 1em;
+    }
+}

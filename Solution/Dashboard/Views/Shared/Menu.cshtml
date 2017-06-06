@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    
+    @using System.Web.Optimization
+
+    <!-- JS -->    
+    @Scripts.Render("~/JS/Bootstrap"
+                , "~/JS/Bootstrap/Bootbox"
+                , "~/JS/Backgrid")
+
+
+    @RenderSection("js", required: false)
+
+    <!-- CSS -->
+    @Styles.Render("~/CSS/Bootstrap")
+    @RenderSection("css", required: false)
+
+    <!-- LESS -->
+    @RenderSection("less", required: false)    
+
+    <!-- Head -->
+    @RenderSection("head", required: false)
+</head>
+<body>  
+
+    <div style="width: 100%;">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <span class="navbar-brand" style="white-space: nowrap;">
+                        DASHBOARD
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li @if (@Request.RawUrl.StartsWith("/Home")) { <text> class="active" </text>     }><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li @if (@Request.RawUrl.StartsWith("/Works")) { <text> class="active" </text>      }><a href="@Url.Action("Index", "Works")">Works</a></li>                        
+                    </ul>                    
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div style="width: 100%; padding-top: 30px;">
+        @RenderBody()
+    </div>
+</body>
+</html>

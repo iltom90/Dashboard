@@ -1,0 +1,76 @@
+﻿@model Dashboard.Models.HomeModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Menu.cshtml";
+}
+
+@section js {
+    @using System.Web.Optimization
+
+    <script type="text/javascript">     
+        // global variables
+        var global_PathGetAnswerStateChartData = "@Url.Action("GetAnswerStateChartData", "Home")";
+        var global_PathGetSubjectChartData = "@Url.Action("GetSubjectChartData", "Home")"; 
+        var global_PathGetUserIdChartData = "@Url.Action("GetUserIdChartData", "Home")";
+    </script>
+
+    @Scripts.Render("~/JS/Bootstrap/Highcharts"
+                , "~/JS/Bootstrap/Bootbox"
+                , "~/JS/Home/Index")
+}
+
+@section css {
+    @Styles.Render("~/CSS/Backgrid")
+}
+
+<div style="width: 100%; text-align: center; vertical-align: middle;">
+    <div class="page-header">
+        <h1>Dashboard<br /></h1>
+    </div>
+
+    <table style="width: 90%; margin: auto;" border="0">
+        <tr>
+            <td  style="text-align: center; vertical-align: middle;">
+                <div id="chartAnswerStateSub1" style="height: 300px; width: 500px; margin: 0 auto"></div>
+            </td>
+            <td  style="text-align: center; vertical-align: middle;">
+                <div id="chartAnswerStateSub2" style="height: 300px; width: 500px; margin: 0 auto"></div>
+            </td>
+            <td  style="text-align: center; vertical-align: middle;">
+                <div id="chartAnswerStateSub3" style="height: 300px; width: 500px; margin: 0 auto"></div>
+            </td>
+        </tr>        
+        <tr>            
+            <td style="text-align: center; vertical-align: middle;" colspan="3">
+                @{
+                    List<SelectListItem> lstUsr = new List<SelectListItem>();
+                    lstUsr.Add(new SelectListItem() { Text = "Select User", Value = "*" });
+                    if (Model.lstUserID != null)
+                    {
+                        Model.lstUserID.ToList().ForEach(usr =>
+                        {
+                            lstUsr.Add(new SelectListItem
+                            {
+
+                                Text = usr.ToString(),
+                                Value = usr.ToString(),
+                            });
+                        });
+                    }
+                }
+                @Html.DropDownListFor(model => model.lstUserID, lstUsr, new { @class = "form-control" , @style= "width: 700px;margin: 0 auto"})
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div id="chartUserChart" style="height: 500px; width: 700px; margin: 0 auto"></div>
+            </td>            
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div id="divMsgErrore" class="alert alert-danger" role="alert" @if (String.IsNullOrEmpty(@ViewBag.MsgErrore)) { <text> style="display:none;" </text>      }>@ViewBag.MsgErrore</div>
+            </td>
+        </tr>
+    </table>
+</div>
